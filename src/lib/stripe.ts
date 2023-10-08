@@ -21,7 +21,7 @@ export async function getUserSubscriptionPlan() {
     }
   }
 
-  const dbUser = await db.user.findFirst({
+  const dbUser =  db.user.findFirst({
     where: {
       id: user.id,
     },
@@ -36,30 +36,30 @@ export async function getUserSubscriptionPlan() {
     }
   }
 
-  const isSubscribed = Boolean(
-    dbUser.stripePriceId &&
-      dbUser.stripeCurrentPeriodEnd && // 86400000 = 1 day
-      dbUser.stripeCurrentPeriodEnd.getTime() + 86_400_000 > Date.now()
-  )
+  // const isSubscribed = Boolean(
+  //   dbUser.stripePriceId &&
+  //     dbUser.stripeCurrentPeriodEnd && // 86400000 = 1 day
+  //     dbUser.stripeCurrentPeriodEnd.getTime() + 86_400_000 > Date.now()
+  // )
 
-  const plan = isSubscribed
-    ? PLANS.find((plan) => plan.price.priceIds.test === dbUser.stripePriceId)
-    : null
+  // const plan = isSubscribed
+  //   ? PLANS.find((plan) => plan.price.priceIds.test === dbUser.stripePriceId)
+  //   : null
 
-  let isCanceled = false
-  if (isSubscribed && dbUser.stripeSubscriptionId) {
-    const stripePlan = await stripe.subscriptions.retrieve(
-      dbUser.stripeSubscriptionId
-    )
-    isCanceled = stripePlan.cancel_at_period_end
-  }
+  // let isCanceled = false
+  // if (isSubscribed && dbUser.stripeSubscriptionId) {
+  //   const stripePlan = await stripe.subscriptions.retrieve(
+  //     dbUser.stripeSubscriptionId
+  //   )
+  //   isCanceled = stripePlan.cancel_at_period_end
+  // }
 
-  return {
-    ...plan,
-    stripeSubscriptionId: dbUser.stripeSubscriptionId,
-    stripeCurrentPeriodEnd: dbUser.stripeCurrentPeriodEnd,
-    stripeCustomerId: dbUser.stripeCustomerId,
-    isSubscribed,
-    isCanceled,
-  }
+  // return {
+  //   ...plan,
+  //   stripeSubscriptionId: dbUser.stripeSubscriptionId,
+  //   stripeCurrentPeriodEnd: dbUser.stripeCurrentPeriodEnd,
+  //   stripeCustomerId: dbUser.stripeCustomerId,
+  //   isSubscribed,
+  //   isCanceled,
+  // }
 }
