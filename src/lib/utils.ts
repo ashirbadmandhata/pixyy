@@ -19,7 +19,7 @@ export function constructMetadata({
   title = "Pixyy - the SaaS for students(Developed by Haripriya and Group)",
   description = "Pixyy is an open-source software to make chatting to your PDF files easy.",
   image = "/thumbnail.jpeg",
-  icons = "/favicon.jpeg",
+  icons = "/favicon.ico",
   noIndex = false
 }: {
   title?: string
