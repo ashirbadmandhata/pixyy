@@ -16,7 +16,7 @@ export function absoluteUrl(path: string) {
 }
 
 export function constructMetadata({
-  title = "Pixyy - the SaaS for students(Developed by Haripriya and Group)",
+  title = "Pixyy - the SaaS for students(Developed by Ashirbad Mandhata)",
   description = "Pixyy is an open-source software to make chatting to your PDF files easy.",
   image = "/thumbnail.jpeg",
   icons = "/favicon.ico",
